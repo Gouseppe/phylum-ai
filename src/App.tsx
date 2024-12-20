@@ -1,16 +1,16 @@
 import bgVideo from "@/assets/bg/video/bacterias.mp4";
 import Button from "./components/Button";
-import { useState } from "react";
+// import { useState } from "react";
 import { QUESTIONS } from "@/config/index";
 import { RadioGroup, RadioGroupItem } from "./components/ui/radio-group";
 import { Label } from "./components/ui/label";
 import { ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
 import { useMotorDeInferencia } from "./hooks/phylumAi";
 
-type Respuesta = {
-  pregunta: number;
-  value: number;
-};
+// type Respuesta = {
+//   pregunta: number;
+//   value: number;
+// };
 
 function App() {
   const {
@@ -18,58 +18,52 @@ function App() {
     undo,
     clear,
     goToQuestion,
+    // isThereAPhylum,
+    setAnswers,
     currentQuestion: preguntaActual,
+    answers,
+    questions,
   } = useMotorDeInferencia();
 
-  const [respuestas, setRespuestas] = useState<Respuesta[]>(
-    new Array(QUESTIONS.length)
-      .fill("")
-      .map((_, index) =>
-        index === 0 ? { pregunta: 0, value: -1 } : { pregunta: -1, value: -1 }
-      )
-  );
+  // const [respuestas, setRespuestas] = useState<Respuesta[]>(
+  //   new Array(QUESTIONS.length)
+  //     .fill("")
+  //     .map((_, index) =>
+  //       index === 0 ? { pregunta: 0, value: -1 } : { pregunta: -1, value: -1 }
+  //     )
+  // );
   // useEffect(() => {
   //   console.log(respuestas);
   // }, [respuestas]);
   // const [cuestionarioFinalizado, setCuestionarioFinalizado] = useState(false);
 
   const handleRespuestaSeleccionada = (respuesta: string) => {
-    const nuevasRespuestas = [...respuestas];
+    const nuevasRespuestas = [...answers];
 
-    if (nuevasRespuestas[preguntaActual].value !== -1) {
-      nuevasRespuestas[preguntaActual].value = Number(respuesta);
-      nuevasRespuestas[preguntaActual].pregunta = preguntaActual;
+    if (nuevasRespuestas[preguntaActual] !== -1) {
+      // nuevasRespuestas[preguntaActual].value = Number(respuesta);
+      // nuevasRespuestas[preguntaActual].pregunta = preguntaActual;
       clear();
-      setRespuestas([
-        ...respuestas.slice(0, preguntaActual + 1),
-        ...respuestas
-          .slice(preguntaActual + 1)
-          .fill({} as Respuesta)
-          .map(() => ({ pregunta: -1, value: -1 })),
-      ]);
+      setAnswers(preguntaActual, Number(respuesta));
     } else {
-      nuevasRespuestas[preguntaActual].value = Number(respuesta);
-      nuevasRespuestas[preguntaActual].pregunta = preguntaActual;
-      setRespuestas(nuevasRespuestas);
+      setAnswers(preguntaActual, Number(respuesta));
     }
   };
 
   const handleSiguientePregunta = () => {
     if (preguntaActual < QUESTIONS.length - 1) {
-      const nextQuestion = getNextQuestion(
-        Number(respuestas[preguntaActual].value)
-      );
-      const copy = [...respuestas];
-      copy[nextQuestion].pregunta = nextQuestion;
-      setRespuestas(copy);
+      const nextQuestion = getNextQuestion(answers[preguntaActual]);
+      setAnswers(nextQuestion);
     }
   };
 
   const handlePreguntaAnterior = () => {
     if (preguntaActual > 0) {
-      if (respuestas[preguntaActual].value === -1) {
-        respuestas[preguntaActual].pregunta = -1;
-      }
+      // esto tengo que quitarlo porque ya no estoy guardando la pregunta, pero esto cambia la logica del renderizado de las preguntas
+      // ya que ahora no puedo tomar encuenta el vlaor de la pregunta en el objeto porque yano lo traajo con un objeto ni con ese valor
+      // if (respuestas[preguntaActual].value === -1) {
+      //   respuestas[preguntaActual].pregunta = -1;
+      // }
       undo();
     }
   };
@@ -86,28 +80,24 @@ function App() {
       <div className="flex flex-row items-start gap-8 w-full justify-center">
         {/* contenedor de las preguntas respondidas */}
         <div className="bg-slate-50 flex flex-col rounded-md overflow-hidden">
-          {respuestas.map((value) => {
-            if (value.pregunta === -1) {
-              return "";
-            } else {
-              return (
-                <div
-                  key={value.pregunta}
-                  onClick={() => {
-                    goToQuestion(value.pregunta);
-                  }}
-                  className="p-2 cursor-pointer hover:bg-slate-500"
-                >
-                  <div>pregunta: {QUESTIONS[Number(value.pregunta)].text}</div>
-                  <div>
-                    valor:{" "}
-                    {QUESTIONS[Number(value.pregunta)].Options.filter(
-                      (e) => e.value === Number(value.value)
-                    )[0]?.text || "No respondida"}
-                  </div>
+          {questions.map((value) => {
+            return (
+              <div
+                key={value}
+                onClick={() => {
+                  goToQuestion(value);
+                }}
+                className="p-2 cursor-pointer hover:bg-slate-500"
+              >
+                <div>pregunta: {QUESTIONS[Number(value)].text}</div>
+                <div>
+                  valor:{" "}
+                  {QUESTIONS[Number(value)].Options.filter(
+                    (e) => e.value === Number(answers[value])
+                  )[0]?.text || "No respondida"}
                 </div>
-              );
-            }
+              </div>
+            );
           })}
         </div>
         {/* contenedor de la pregunta actual */}
@@ -118,7 +108,7 @@ function App() {
           <div className="bg-slate-50 rounded-md p-4">
             <div>
               <RadioGroup
-                value={String(respuestas[preguntaActual].value)}
+                value={String(answers[preguntaActual])}
                 onValueChange={handleRespuestaSeleccionada}
               >
                 {QUESTIONS[preguntaActual].Options.map((opcion, index) => (

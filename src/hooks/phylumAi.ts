@@ -1,9 +1,22 @@
 import { useState } from "react";
+import { PHYLUMS } from "@/config";
 
 export const useMotorDeInferencia = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [index, setIndex] = useState(0);
   const [questions, setQuestions] = useState([0] as number[]);
+  const [answers, setAnswers] = useState<number[]>(new Array(7).fill(-1));
+
+  const setAnswerNew = (indexAnswer: number, answer = -1) => {
+    const aux = [...answers];
+    aux[indexAnswer] = answer;
+    console.log(aux);
+    setAnswers(aux);
+  };
+
+  const isThereAPhylum = (): boolean => {
+    return PHYLUMS.some((e) => e === answers);
+  };
 
   const getNextQuestion = (answer: number) => {
     setIndex(index + 1);
@@ -38,8 +51,15 @@ export const useMotorDeInferencia = () => {
   };
 
   const clear = () => {
-    console.log(questions);
-    console.log("respuesta: ", questions.slice(0, index + 1), index);
+    console.log(
+      "preguntas despues de limpiar: ",
+      questions.slice(0, index + 1),
+      index
+    );
+    setAnswers([
+      ...answers.slice(0, currentQuestion + 1),
+      ...answers.slice(currentQuestion + 1).fill(-1),
+    ]);
     setQuestions(questions.slice(0, index + 1));
   };
 
@@ -55,6 +75,10 @@ export const useMotorDeInferencia = () => {
     undo,
     clear,
     goToQuestion,
+    setAnswers: setAnswerNew,
+    isThereAPhylum,
     currentQuestion,
+    answers,
+    questions,
   };
 };

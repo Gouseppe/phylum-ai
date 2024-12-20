@@ -9,7 +9,7 @@ import { useMotorDeInferencia } from "./hooks/phylumAi";
 
 type Respuesta = {
   pregunta: number;
-  value: string;
+  value: number;
 };
 
 function App() {
@@ -22,7 +22,11 @@ function App() {
   } = useMotorDeInferencia();
 
   const [respuestas, setRespuestas] = useState<Respuesta[]>(
-    new Array(QUESTIONS.length).fill("").map(() => ({ pregunta: 0, value: "" }))
+    new Array(QUESTIONS.length)
+      .fill("")
+      .map((_, index) =>
+        index === 0 ? { pregunta: 0, value: -1 } : { pregunta: -1, value: -1 }
+      )
   );
   // useEffect(() => {
   //   console.log(respuestas);
@@ -32,8 +36,8 @@ function App() {
   const handleRespuestaSeleccionada = (respuesta: string) => {
     const nuevasRespuestas = [...respuestas];
 
-    if (nuevasRespuestas[preguntaActual].value !== "") {
-      nuevasRespuestas[preguntaActual].value = respuesta;
+    if (nuevasRespuestas[preguntaActual].value !== -1) {
+      nuevasRespuestas[preguntaActual].value = Number(respuesta);
       nuevasRespuestas[preguntaActual].pregunta = preguntaActual;
       clear();
       setRespuestas([
@@ -41,10 +45,10 @@ function App() {
         ...respuestas
           .slice(preguntaActual + 1)
           .fill({} as Respuesta)
-          .map(() => ({ pregunta: 0, value: "" })),
+          .map(() => ({ pregunta: -1, value: -1 })),
       ]);
     } else {
-      nuevasRespuestas[preguntaActual].value = respuesta;
+      nuevasRespuestas[preguntaActual].value = Number(respuesta);
       nuevasRespuestas[preguntaActual].pregunta = preguntaActual;
       setRespuestas(nuevasRespuestas);
     }
@@ -52,20 +56,23 @@ function App() {
 
   const handleSiguientePregunta = () => {
     if (preguntaActual < QUESTIONS.length - 1) {
-      getNextQuestion(Number(respuestas[preguntaActual].value));
+      const nextQuestion = getNextQuestion(
+        Number(respuestas[preguntaActual].value)
+      );
+      const copy = [...respuestas];
+      copy[nextQuestion].pregunta = nextQuestion;
+      setRespuestas(copy);
     }
   };
 
   const handlePreguntaAnterior = () => {
     if (preguntaActual > 0) {
+      if (respuestas[preguntaActual].value === -1) {
+        respuestas[preguntaActual].pregunta = -1;
+      }
       undo();
     }
   };
-
-  // const handleFinalizarCuestionario = () => {
-  //   setCuestionarioFinalizado(true);
-  //   console.log("Cuestionario finalizado", respuestas);
-  // };
 
   return (
     <div className="layout m-0 w-svw h-svh flex items-center justify-center flex-row ">
@@ -80,7 +87,7 @@ function App() {
         {/* contenedor de las preguntas respondidas */}
         <div className="bg-slate-50 flex flex-col rounded-md overflow-hidden">
           {respuestas.map((value) => {
-            if (value.value === "") {
+            if (value.pregunta === -1) {
               return "";
             } else {
               return (
@@ -94,11 +101,9 @@ function App() {
                   <div>pregunta: {QUESTIONS[Number(value.pregunta)].text}</div>
                   <div>
                     valor:{" "}
-                    {
-                      QUESTIONS[Number(value.pregunta)].Options.filter(
-                        (e) => e.value === Number(value.value)
-                      )[0].text
-                    }
+                    {QUESTIONS[Number(value.pregunta)].Options.filter(
+                      (e) => e.value === Number(value.value)
+                    )[0]?.text || "No respondida"}
                   </div>
                 </div>
               );
@@ -113,7 +118,7 @@ function App() {
           <div className="bg-slate-50 rounded-md p-4">
             <div>
               <RadioGroup
-                value={respuestas[preguntaActual].value}
+                value={String(respuestas[preguntaActual].value)}
                 onValueChange={handleRespuestaSeleccionada}
               >
                 {QUESTIONS[preguntaActual].Options.map((opcion, index) => (

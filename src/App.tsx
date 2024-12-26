@@ -1,16 +1,11 @@
 import bgVideo from "@/assets/bg/video/bacterias.mp4";
 import Button from "./components/Button";
-// import { useState } from "react";
 import { QUESTIONS } from "@/config/index";
 import { RadioGroup, RadioGroupItem } from "./components/ui/radio-group";
 import { Label } from "./components/ui/label";
 import { ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
 import { useMotorDeInferencia } from "./hooks/phylumAi";
-
-// type Respuesta = {
-//   pregunta: number;
-//   value: number;
-// };
+import { getPhylum } from "./config/api/backend/requests/phylum";
 
 function App() {
   const {
@@ -18,31 +13,17 @@ function App() {
     undo,
     clear,
     goToQuestion,
-    // isThereAPhylum,
+    isThereAPhylum,
     setAnswers,
     currentQuestion: preguntaActual,
     answers,
     questions,
   } = useMotorDeInferencia();
 
-  // const [respuestas, setRespuestas] = useState<Respuesta[]>(
-  //   new Array(QUESTIONS.length)
-  //     .fill("")
-  //     .map((_, index) =>
-  //       index === 0 ? { pregunta: 0, value: -1 } : { pregunta: -1, value: -1 }
-  //     )
-  // );
-  // useEffect(() => {
-  //   console.log(respuestas);
-  // }, [respuestas]);
-  // const [cuestionarioFinalizado, setCuestionarioFinalizado] = useState(false);
-
   const handleRespuestaSeleccionada = (respuesta: string) => {
     const nuevasRespuestas = [...answers];
 
     if (nuevasRespuestas[preguntaActual] !== -1) {
-      // nuevasRespuestas[preguntaActual].value = Number(respuesta);
-      // nuevasRespuestas[preguntaActual].pregunta = preguntaActual;
       clear();
       setAnswers(preguntaActual, Number(respuesta));
     } else {
@@ -50,7 +31,14 @@ function App() {
     }
   };
 
-  const handleSiguientePregunta = () => {
+  const handleSiguientePregunta = async () => {
+    console.log(isThereAPhylum());
+    if (isThereAPhylum()) {
+      console.log("entroooo");
+      const respons = await getPhylum(answers.map((a) => (a === -1 ? 0 : a)));
+      alert(respons);
+      return;
+    }
     if (preguntaActual < QUESTIONS.length - 1) {
       const nextQuestion = getNextQuestion(answers[preguntaActual]);
       setAnswers(nextQuestion);

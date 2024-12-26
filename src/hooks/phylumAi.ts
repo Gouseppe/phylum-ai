@@ -15,7 +15,11 @@ export const useMotorDeInferencia = () => {
   };
 
   const isThereAPhylum = (): boolean => {
-    return PHYLUMS.some((e) => e === answers);
+    console.log(answers.map((a) => (a === -1 ? 0 : a)));
+    const auxAnswer = answers.map((a) => (a === -1 ? 0 : a));
+    return PHYLUMS.some((e) =>
+      e.every((element, index) => element === auxAnswer[index])
+    );
   };
 
   const getNextQuestion = (answer: number) => {

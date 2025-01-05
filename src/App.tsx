@@ -24,8 +24,8 @@ function App() {
     const nuevasRespuestas = [...answers];
 
     if (nuevasRespuestas[preguntaActual] !== -1) {
-      clear();
       setAnswers(preguntaActual, Number(respuesta));
+      clear();
     } else {
       setAnswers(preguntaActual, Number(respuesta));
     }

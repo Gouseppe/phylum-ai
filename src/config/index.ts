@@ -1,19 +1,19 @@
 import { Question } from "@/types/question";
 
 export const PHYLUMS = [
-  [1, 0, 0, 0, 0, 0, 0],
-  [2, 1, 0, 0, 0, 0, 0],
-  [2, 2, 1, 0, 0, 0, 0],
-  [2, 2, 2, 0, 1, 0, 0],
-  [2, 2, 2, 0, 2, 0, 0],
-  [2, 2, 3, 1, 1, 0, 0],
-  [2, 2, 3, 1, 2, 0, 0],
-  [2, 2, 3, 2, 1, 0, 0],
-  [2, 2, 3, 2, 2, 0, 0],
-  [2, 2, 3, 3, 0, 1, 0],
-  [2, 3, 3, 3, 0, 2, 1],
-  [2, 3, 3, 3, 0, 2, 2],
-  [2, 3, 3, 3, 0, 2, 3],
+  [1, 0, 0, 0, 0, 0, 0], // Protozoarios
+  [2, 1, 0, 0, 0, 0, 0], // Poriferos
+  [2, 2, 1, 0, 0, 0, 0], // Equinodermos
+  [2, 2, 2, 0, 1, 0, 0], // Ctnoforos
+  [2, 2, 2, 0, 2, 0, 0], // Cnidardos
+  [2, 2, 3, 1, 1, 0, 0], // Nemertinos
+  [2, 2, 3, 1, 2, 0, 0], // Platermintos
+  [2, 2, 3, 2, 1, 0, 0], // Acantocefalos
+  [2, 2, 3, 2, 2, 0, 0], // Asquelmintos
+  [2, 2, 3, 3, 0, 1, 0], // Cordados
+  [2, 2, 3, 3, 0, 2, 1], // Moluscos
+  [2, 2, 3, 3, 0, 2, 2], // Anelidos
+  [2, 2, 3, 3, 0, 2, 3], // Artropodos
 ];
 
 export const QUESTIONS: Question[] = [
@@ -35,11 +35,11 @@ export const QUESTIONS: Question[] = [
     Options: [
       {
         text: "no",
-        value: 0,
+        value: 1,
       },
       {
         text: "si",
-        value: 1,
+        value: 2,
       },
     ],
   },
@@ -57,10 +57,6 @@ export const QUESTIONS: Question[] = [
       {
         text: "Bilateral",
         value: 3,
-      },
-      {
-        text: "Nulo",
-        value: 0,
       },
     ],
   },

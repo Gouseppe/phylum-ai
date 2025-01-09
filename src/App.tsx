@@ -3,7 +3,7 @@ import Button from "./components/Button";
 import { QUESTIONS } from "@/config/index";
 import { RadioGroup, RadioGroupItem } from "./components/ui/radio-group";
 import { Label } from "./components/ui/label";
-import { ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useMotorDeInferencia } from "./hooks/phylumAi";
 import { getPhylum } from "./config/api/backend/requests/phylum";
 
@@ -57,7 +57,7 @@ function App() {
   };
 
   return (
-    <div className="layout m-0 w-svw h-svh flex items-center justify-center flex-row ">
+    <div className="layout m-0 w-svw h-svh flex md:items-center items-start md:justify-center flex-row p-4">
       <video
         src={bgVideo}
         autoPlay
@@ -65,9 +65,9 @@ function App() {
         loop
         className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover"
       ></video>
-      <div className="flex flex-row items-start gap-8 w-full justify-center">
+      <div className="flex md:flex-row flex-col items-start gap-4 w-full justify-center h-full overflow-auto">
         {/* contenedor de las preguntas respondidas */}
-        <div className="bg-slate-50 flex flex-col rounded-md overflow-hidden">
+        <div className="bg-slate-50 flex flex-col rounded-md overflow-auto md:order-0 order-1">
           {questions.map((value) => {
             return (
               <div
@@ -89,7 +89,7 @@ function App() {
           })}
         </div>
         {/* contenedor de la pregunta actual */}
-        <div className="flex flex-col gap-4 w-3/4 max-w-xl">
+        <div className="flex flex-col gap-4 md:w-3/4 md:max-w-xl w-full">
           <div className="flex bg-slate-50 rounded-md p-4">
             {QUESTIONS[preguntaActual]?.text || "nada"}
           </div>
@@ -130,7 +130,7 @@ function App() {
                   <ChevronRight />
                 </Button>
               </div>
-              <Button
+              {/* <Button
                 onClick={() => alert("viva chavez no joda")}
                 text="terminar analisis"
                 variant="solid"
@@ -138,7 +138,7 @@ function App() {
                 textColor="white"
               >
                 <CheckCircle />
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>

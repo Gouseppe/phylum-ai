@@ -65,9 +65,9 @@ function App() {
         loop
         className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover"
       ></video>
-      <div className="flex md:flex-row flex-col items-start gap-4 w-full justify-center h-full overflow-auto">
+      <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto h-full">
         {/* contenedor de las preguntas respondidas */}
-        <div className="bg-slate-50 flex flex-col rounded-md overflow-auto md:order-0 order-1">
+        <div className="bg-slate-50 flex flex-col rounded-md overflow-auto md:-order-none order-1">
           {questions.map((value) => {
             return (
               <div

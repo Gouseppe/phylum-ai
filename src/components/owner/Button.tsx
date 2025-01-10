@@ -1,11 +1,14 @@
+import { CSSProperties } from "react";
+
 type Props = {
   variant: "outline" | "solid";
   bgColor?: string;
   textColor?: string;
   text: string;
   iconPosition?: "left" | "right";
-  onClick: () => void;
+  onClick?: () => void;
   children?: React.ReactNode | undefined;
+  style?: CSSProperties;
 };
 
 const Button: React.FC<Props> = ({
@@ -16,6 +19,7 @@ const Button: React.FC<Props> = ({
   iconPosition = "left",
   textColor = "black",
   children,
+  style,
 }) => {
   const styles =
     variant === "solid"
@@ -32,8 +36,8 @@ const Button: React.FC<Props> = ({
 
   return (
     <button
-      style={styles}
-      onClick={() => onClick()}
+      style={{ ...styles, ...style }}
+      onClick={onClick}
       className="p-2 text-base relative overflow-hidden border rounded-md group"
     >
       <div className="absolute inset-0 bg-transparent group-hover:bg-gray-950/20 transition-colors duration-500"></div>

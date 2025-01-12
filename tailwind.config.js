@@ -22,6 +22,12 @@ export default {
             top: "40vh",
             transform: "translate(-50%, -50%)",
           },
+          "50%": {
+            position: "relative",
+            left: "50%",
+            top: "40vh",
+            transform: "translate(-50%, -50%)",
+          },
           "100%": {
             position: "relative",
             left: "50%",

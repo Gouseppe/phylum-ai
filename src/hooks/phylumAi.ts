@@ -10,11 +10,11 @@ DOCUMENTACION PARA ENTENDER EL USO DEL DEL HOOK
 */
 
 export const useMotorDeInferencia = () => {
-  // Guarda el numero asociado a la pregunta
+  // Guarda el numero asociado a la pregunta actual
   const [currentQuestion, setCurrentQuestion] = useState(0);
   // Guarda la posicion en la que nos encontramos del estado questions
   const [index, setIndex] = useState(0);
-  // Guarda cada el numero asociado a las preguntas en el orden que se hicieron
+  // Guarda el numero asociado a las preguntas en el orden que se hicieron
   const [questions, setQuestions] = useState([0] as number[]);
   // Guarda las repuestas que se hicieron. Cada respuestas esta en la posicion de cada pregunta con relacion al numero asociado a la pregunta
   const [answers, setAnswers] = useState<number[]>(new Array(7).fill(-1));

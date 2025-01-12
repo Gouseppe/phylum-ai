@@ -19,10 +19,20 @@ export const PHYLUMS = [
 export const QUESTIONS: Question[] = [
   {
     text: "Tu organismo es unicelular o multicelular",
+    userHelper: {
+      title: "Tu organismo es unicelufar o multicelular?",
+      description:
+        "Un organismo unicelular es como una pequeña 'fábrica' completa dentro de una sola célula, que realiza todas las funciones necesarias para vivir. Un organismo multicelular, como los animales y las plantas, está compuesto por millones o billones de células que trabajan juntas para formar tejidos y órganos.",
+    },
     Options: [
       {
         text: "Unicelular",
         value: 1,
+        userHelper: {
+          title: "Organismos unicelulares",
+          description:
+            "son todos aquello que estan compuestos de una sola celula",
+        },
       },
       {
         text: "Multicelular",
@@ -32,6 +42,11 @@ export const QUESTIONS: Question[] = [
   },
   {
     text: "Tu organismo posee tejidos verdaderos?",
+    userHelper: {
+      description:
+        "Un tejido verdadero es un conjunto de células que tienen una estructura similar y trabajan juntas para realizar una función específica dentro de un organismo. Imagina que las células son como los ladrillos de una casa: cada ladrillo tiene una función específica (soportar el peso, aislar del frío, etc.), pero todos juntos forman las paredes y estructuras de la casa. Lo mismo ocurre con las células en un tejido: aunque cada una tiene su propia función, al trabajar juntas forman un tejido que cumple una función más compleja.",
+      title: "Tejido verdadero",
+    },
     Options: [
       {
         text: "no",

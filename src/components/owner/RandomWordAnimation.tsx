@@ -9,21 +9,14 @@ export const RandomWordAnimation: React.FC<Props> = ({
   text,
   velocity = 4000,
 }) => {
-  const [textState, setTextState] = useState<string>(
-    text
-      .split("")
-      .map(() => LETTERS[Math.floor(Math.random() * LETTERS.length)])
-      .join("")
-  );
+  const [textState, setTextState] = useState("");
   const iterations = useRef(0);
   useEffect(() => {
     const intervalID = setInterval(() => {
-      const aux = text;
-
       setTextState(
-        aux
+        text
           .split("")
-          .map((e, i) => {
+          .map((_, i) => {
             if (i < iterations.current) {
               return text[i];
             } else {
@@ -35,8 +28,18 @@ export const RandomWordAnimation: React.FC<Props> = ({
       if (Math.floor(iterations.current) === (text.length as number) - 1) {
         clearInterval(intervalID);
       }
-      iterations.current += 1 / 2;
-    }, velocity / (text.length / (1 / 2)));
+      iterations.current += 1 / 4;
+    }, velocity / (text.length / (1 / 4)));
   }, []);
-  return <div className="text-4xl font-bold text-white">{textState}</div>;
+  return (
+    <div
+      className="md:text-9xl text-6xl text-gray-50 animate-[open_4s_ease-in-out] font-[Yellowtail] relative"
+      style={{
+        textShadow:
+          " 0 0 7px #f9fafb,0 0 10px #f9fafb,0 0 21px #f9fafb,0 0 42px #5271ff,0 0 82px #5271ff,0 0 92px #5271ff,0 0 102px #5271ff,0 0 151px #5271ff ",
+      }}
+    >
+      {textState}
+    </div>
+  );
 };

@@ -8,9 +8,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // components
 import { RadioGroup, RadioGroupItem } from "./components/shadcn/radio-group";
 import { Label } from "./components/shadcn/label";
-
 import Button from "./components/owner/Button";
 import { UserHelper } from "./components/owner/UserHelper";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/shadcn/dialog";
+import { useRef, useState } from "react";
+import { RandomWordAnimation } from "./components/owner/RandomWordAnimation";
 
 function App() {
   const {
@@ -24,6 +32,8 @@ function App() {
     answers,
     questions,
   } = useMotorDeInferencia();
+  const [respuesta, setRespuesta] = useState("");
+  const botonInvisible = useRef(null);
 
   const handleRespuestaSeleccionada = (respuesta: string) => {
     const nuevasRespuestas = [...answers];
@@ -37,11 +47,11 @@ function App() {
   };
 
   const handleSiguientePregunta = async () => {
-    console.log(isThereAPhylum());
     if (isThereAPhylum()) {
       console.log("entroooo");
       const respons = await getPhylum(answers.map((a) => (a === -1 ? 0 : a)));
-      alert(respons);
+      setRespuesta(respons);
+      (botonInvisible.current as unknown as HTMLButtonElement).click();
       return;
     }
     if (preguntaActual < QUESTIONS.length - 1) {
@@ -62,16 +72,32 @@ function App() {
   };
 
   return (
-    <div className="layout m-0 w-svw h-svh flex md:items-center items-start md:justify-center flex-row p-4">
+    <div className="layout m-0 w-svw h-svh flex relative justify-start items-center flex-col p-4 md:gap-10 gap-7 bg-gray-950 z-0">
       <video
         src={bgVideo}
         autoPlay
         muted
         loop
-        className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover"
+        className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover animate-[appears_4s_ease-in-out]"
       ></video>
-      <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto h-full">
+      <div className="pt-4">
+        <RandomWordAnimation text="Phylum AI" />
+      </div>
+      <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto h-full animate-[appears_4s_ease-in-out]">
+        <Dialog>
+          <DialogTrigger className="absolute">
+            <div className="sr-only" ref={botonInvisible}>
+              activar respuesta
+            </div>
+          </DialogTrigger>
+          <DialogContent className="sm:w-[700px] max-w-[95%]">
+            <DialogHeader className="justify-center items-center">
+              <DialogTitle>{respuesta}</DialogTitle>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
         {/* contenedor de las preguntas respondidas */}
+
         <div className=" flex flex-col rounded-md overflow-auto md:-order-none order-1 p-4 bg-black bg-opacity-30 gap-2">
           {questions.map((value) => {
             return (
@@ -80,11 +106,13 @@ function App() {
                 onClick={() => {
                   goToQuestion(value);
                 }}
-                className="p-2 cursor-pointer hover:bg-slate-500 bg-white rounded-sm"
+                className="p-2 cursor-pointer hover:bg-slate-500 bg-white rounded-[2px]"
               >
-                <div>pregunta: {QUESTIONS[Number(value)].text}</div>
-                <div>
-                  valor:{" "}
+                <div className="font-light">
+                  {QUESTIONS[Number(value)].text}
+                </div>
+                <div className="flex flex-row gap-1 ">
+                  <div className="font-light">Respuesta: </div>
                   {QUESTIONS[Number(value)].Options.filter(
                     (e) => e.value === Number(answers[value])
                   )[0]?.text || "No respondida"}
@@ -96,7 +124,10 @@ function App() {
         {/* contenedor de la pregunta actual */}
         <div className="flex flex-col gap-4 md:w-3/4 md:max-w-xl w-full">
           <div className="flex flex-col bg-slate-50 rounded-md p-4">
-            {QUESTIONS[preguntaActual]?.text || "nada"}
+            <div className="text-lg ">
+              {QUESTIONS[preguntaActual]?.text ||
+                "Hubo un Problema con la pregunta..."}
+            </div>
             {QUESTIONS[preguntaActual].userHelper?.description && (
               <div className="item self-end">
                 <UserHelper
@@ -118,13 +149,21 @@ function App() {
                     <RadioGroupItem
                       value={String(opcion.value)}
                       id={`opcion-${index}`}
+                      className="w-5 h-5"
                     />
-                    <Label htmlFor={`opcion-${index}`}>{opcion.text}</Label>
+                    <Label
+                      className="text-base font-normal"
+                      htmlFor={`opcion-${index}`}
+                    >
+                      {opcion.text}
+                    </Label>
                     {opcion.userHelper && (
-                      <UserHelper
-                        description={opcion.userHelper.description}
-                        title={opcion.userHelper.title}
-                      />
+                      <div>
+                        <UserHelper
+                          description={opcion.userHelper.description}
+                          title={opcion.userHelper.title}
+                        />
+                      </div>
                     )}
                   </div>
                 ))}
@@ -138,7 +177,9 @@ function App() {
                   text="anterior"
                   variant="outline"
                 >
-                  <ChevronLeft />
+                  <div className="text-gray-600">
+                    <ChevronLeft />
+                  </div>
                 </Button>
 
                 <Button
@@ -147,9 +188,12 @@ function App() {
                   variant="outline"
                   iconPosition="right"
                 >
-                  <ChevronRight />
+                  <div className="text-gray-600">
+                    <ChevronRight />
+                  </div>
                 </Button>
               </div>
+
               {/* <Button
                 onClick={() => alert("viva chavez no joda")}
                 text="terminar analisis"

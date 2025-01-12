@@ -18,16 +18,21 @@ export const UserHelper: React.FC<Props> = ({ description, title }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          text=""
-          variant="outline"
-          onClick={() => {}}
-          style={{ border: "none", borderRadius: "30px" }}
-        >
-          <div className="w-full h-full">
-            <MessageCircleQuestion size={"1.5rem"} className=" text-gray-600" />
-          </div>
-        </Button>
+        <div>
+          <Button
+            text=""
+            variant="outline"
+            onClick={() => {}}
+            style={{ border: "none", borderRadius: "30px" }}
+          >
+            <div className="w-full h-full">
+              <MessageCircleQuestion
+                size={"1.5rem"}
+                className=" text-gray-600"
+              />
+            </div>
+          </Button>
+        </div>
       </DialogTrigger>
       <DialogContent className="sm:w-[700px] max-w-[95%]">
         <DialogHeader>

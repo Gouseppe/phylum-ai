@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       keyframes: {
+        // WARNING: la animacion pulsate se puede usar pero no se le puede agregar un animation duration muy bajo (0.11 por ejemplo) ya que genera mucha precion para la GPU, usar bajo las consideraciones mencionadas
         pulsate: {
           "100%": {
             "text-shadow":

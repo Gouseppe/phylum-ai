@@ -78,13 +78,13 @@ function App() {
         autoPlay
         muted
         loop
-        className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover animate-[appears_4s_ease-in-out]"
+        className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover"
       ></video>
       <div className="pt-4 basis-0">
         {/* <RandomWordAnimation text="Phylum AI" /> */}
         <Writter text="Phylum AI" />
       </div>
-      <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto  animate-[appears_4s_ease-in-out] overflow-hidden">
+      <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto  animate-[appears_1s_ease-in-out] overflow-hidden">
         <Dialog>
           <DialogTrigger className="absolute">
             <div className="sr-only" ref={botonInvisible}>

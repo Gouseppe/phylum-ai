@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/shadcn/dialog";
 import { useRef, useState } from "react";
-import { RandomWordAnimation } from "./components/owner/RandomWordAnimation";
+import { Writter } from "./components/owner/Writter";
 
 function App() {
   const {
@@ -81,7 +81,8 @@ function App() {
         className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover animate-[appears_4s_ease-in-out]"
       ></video>
       <div className="pt-4">
-        <RandomWordAnimation text="Phylum AI" />
+        {/* <RandomWordAnimation text="Phylum AI" /> */}
+        <Writter text="Phylum AI" />
       </div>
       <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto h-full animate-[appears_4s_ease-in-out]">
         <Dialog>

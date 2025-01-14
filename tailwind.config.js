@@ -55,6 +55,24 @@ export default {
             opacity: "1",
           },
         },
+        cursorTextAnimation: {
+          "0%": {
+            top: "100%",
+            botton: "0",
+          },
+          "20%": {
+            top: "0",
+            botton: "0",
+          },
+          "80%": {
+            top: "0",
+            botton: "0",
+          },
+          "100%": {
+            top: "100%",
+            botton: "0",
+          },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

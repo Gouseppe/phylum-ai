@@ -72,7 +72,7 @@ function App() {
   };
 
   return (
-    <div className="layout m-0 w-svw md:h-svh min-h-svh flex relative justify-start items-center flex-col p-4 md:gap-10 gap-7 bg-gray-950 z-0">
+    <div className="layout m-0 w-svw md:h-svh h-[max(667px,100svh)] flex relative justify-start items-center flex-col p-4 md:gap-10 gap-7 bg-gray-950 z-0">
       <video
         src={bgVideo}
         autoPlay
@@ -80,11 +80,11 @@ function App() {
         loop
         className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover animate-[appears_4s_ease-in-out]"
       ></video>
-      <div className="pt-4">
+      <div className="pt-4 basis-0">
         {/* <RandomWordAnimation text="Phylum AI" /> */}
         <Writter text="Phylum AI" />
       </div>
-      <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto h-full animate-[appears_4s_ease-in-out]">
+      <div className="flex md:flex-row flex-col items-start gap-4 w-full md:justify-center md:h-auto  animate-[appears_4s_ease-in-out] overflow-hidden">
         <Dialog>
           <DialogTrigger className="absolute">
             <div className="sr-only" ref={botonInvisible}>
@@ -99,7 +99,7 @@ function App() {
         </Dialog>
         {/* contenedor de las preguntas respondidas */}
 
-        <div className=" flex flex-col rounded-md overflow-auto md:-order-none order-1 p-4 bg-black bg-opacity-30 gap-2 md:max-h-none  max-h-36">
+        <div className=" flex flex-col rounded-md overflow-auto md:-order-none order-1 p-4 bg-black bg-opacity-30 gap-2 md:max-h-none min-h-34 md:min-h-min">
           {questions.map((value) => {
             return (
               <div

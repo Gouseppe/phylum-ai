@@ -72,7 +72,7 @@ function App() {
   };
 
   return (
-    <div className="layout m-0 w-svw h-svh flex relative justify-start items-center flex-col p-4 md:gap-10 gap-7 bg-gray-950 z-0">
+    <div className="layout m-0 w-svw md:h-svh min-h-svh flex relative justify-start items-center flex-col p-4 md:gap-10 gap-7 bg-gray-950 z-0">
       <video
         src={bgVideo}
         autoPlay
@@ -98,7 +98,7 @@ function App() {
         </Dialog>
         {/* contenedor de las preguntas respondidas */}
 
-        <div className=" flex flex-col rounded-md overflow-auto md:-order-none order-1 p-4 bg-black bg-opacity-30 gap-2">
+        <div className=" flex flex-col rounded-md overflow-auto md:-order-none order-1 p-4 bg-black bg-opacity-30 gap-2 md:max-h-none  max-h-36">
           {questions.map((value) => {
             return (
               <div

@@ -21,7 +21,7 @@ export const Writter: React.FC<Props> = ({ text }) => {
     }
   }, []);
   return (
-    <div className="flex col animate-[open_3.4s_ease-in-out]  relative justify-center">
+    <div className="flex col relative justify-center">
       <div
         ref={element}
         className="md:text-9xl md:h-[128px] text-6xl h-[60px] text-gray-50 font-[Yellowtail]"

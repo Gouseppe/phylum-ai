@@ -57,20 +57,20 @@ export default {
         },
         cursorTextAnimation: {
           "0%": {
-            top: "100%",
-            botton: "0",
+            top: "50%",
+            bottom: "50%",
           },
           "20%": {
             top: "0",
-            botton: "0",
+            bottom: "0",
           },
           "80%": {
             top: "0",
-            botton: "0",
+            bottom: "0",
           },
           "100%": {
-            top: "100%",
-            botton: "0",
+            top: "50%",
+            bottom: "50%",
           },
         },
       },

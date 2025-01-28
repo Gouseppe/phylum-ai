@@ -18,11 +18,12 @@ export const PHYLUMS = [
 
 export const QUESTIONS: Question[] = [
   {
-    text: "Tu organismo es unicelular o multicelular",
+    text: "¿Tu organismo es unicelular o multicelular?",
     userHelper: {
-      title: "Tu organismo es unicelufar o multicelular?",
+      title: "¿Tu organismo es unicelular o multicelular?",
       description:
         "Un organismo unicelular es como una pequeña 'fábrica' completa dentro de una sola célula, que realiza todas las funciones necesarias para vivir. Un organismo multicelular, como los animales y las plantas, está compuesto por millones o billones de células que trabajan juntas para formar tejidos y órganos.",
+      images: ["organismo-unicelular", "organismo-unicelular-2"],
     },
     Options: [
       {
@@ -32,6 +33,7 @@ export const QUESTIONS: Question[] = [
           title: "Organismos unicelulares",
           description:
             "son todos aquello que estan compuestos de una sola celula",
+          images: ["organismo-unicelular"],
         },
       },
       {
@@ -41,7 +43,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    text: "Tu organismo posee tejidos verdaderos?",
+    text: "¿Tu organismo posee tejidos verdaderos?",
     userHelper: {
       description:
         "Un tejido verdadero es un conjunto de células que tienen una estructura similar y trabajan juntas para realizar una función específica dentro de un organismo. Imagina que las células son como los ladrillos de una casa: cada ladrillo tiene una función específica (soportar el peso, aislar del frío, etc.), pero todos juntos forman las paredes y estructuras de la casa. Lo mismo ocurre con las células en un tejido: aunque cada una tiene su propia función, al trabajar juntas forman un tejido que cumple una función más compleja.",
@@ -59,7 +61,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    text: "Que tipo de simetria tiene tu organismo?",
+    text: "¿Que tipo de simetria tiene tu organismo?",
     Options: [
       {
         text: "Radial secundaria",
@@ -76,7 +78,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    text: "Que tipo de revestimiento tiene?",
+    text: "¿Que tipo de revestimiento tiene?",
     Options: [
       {
         text: "Acelomados (nulo)",
@@ -93,7 +95,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    text: "Tienen sistema digestivo completo o incompleto?",
+    text: "¿Tienen sistema digestivo completo o incompleto?",
     Options: [
       {
         text: "Completo",
@@ -106,7 +108,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    text: "Son esquixocelomados o enterocelomados?",
+    text: "¿Son esquixocelomados o enterocelomados?",
     Options: [
       {
         text: "enterocelomados",
@@ -119,7 +121,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    text: "Tiene manto y concha, esqueleto hidrostatatico o exoesqueleto?",
+    text: "¿Tiene manto y concha, esqueleto hidrostatatico o exoesqueleto?",
     Options: [
       {
         text: "Manto y concha",

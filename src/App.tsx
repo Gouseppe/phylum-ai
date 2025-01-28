@@ -107,7 +107,7 @@ function App() {
                 onClick={() => {
                   goToQuestion(value);
                 }}
-                className="p-2 cursor-pointer hover:bg-slate-500 bg-white rounded-[2px]"
+                className="p-2 cursor-pointer  bg-white  rounded-[2px]  transition-all duration-300 hover:shadow-[0_0_7px_#f9fafb,0_0_10px_#65788c,0_0_11px_#05386c,0_0_22px_#0629d7] hover:scale-[1.03]"
               >
                 <div className="font-light">
                   {QUESTIONS[Number(value)].text}
@@ -122,6 +122,7 @@ function App() {
             );
           })}
         </div>
+
         {/* contenedor de la pregunta actual */}
         <div className="flex flex-col gap-4 md:w-3/4 md:max-w-xl w-full">
           <div className="flex flex-col bg-slate-50 rounded-md p-4">
@@ -134,6 +135,7 @@ function App() {
                 <UserHelper
                   description={QUESTIONS[preguntaActual].userHelper.description}
                   title={QUESTIONS[preguntaActual].userHelper.title}
+                  images={QUESTIONS[preguntaActual].userHelper.images}
                 />
               </div>
             )}
@@ -163,6 +165,7 @@ function App() {
                         <UserHelper
                           description={opcion.userHelper.description}
                           title={opcion.userHelper.title}
+                          images={opcion.userHelper.images}
                         />
                       </div>
                     )}

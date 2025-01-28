@@ -2,7 +2,6 @@ import { MessageCircleQuestion } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,9 +11,16 @@ import Button from "./Button";
 interface Props {
   title: string;
   description: string;
+  images?: string[];
 }
 
-export const UserHelper: React.FC<Props> = ({ description, title }) => {
+function getImageUrl(name: string) {
+  // note that this does not include files in subdirectories
+  return new URL(`../../assets/img/${name}.png`, import.meta.url).href;
+}
+
+export const UserHelper: React.FC<Props> = ({ description, title, images }) => {
+  console.log(import.meta.url);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -37,8 +43,21 @@ export const UserHelper: React.FC<Props> = ({ description, title }) => {
       <DialogContent className="sm:w-[700px] max-w-[95%]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
+        <div>{description}</div>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-1 ">
+          {images &&
+            images.map((url, index) => (
+              <img
+                key={url}
+                src={getImageUrl(url)}
+                alt={url}
+                className={`${
+                  index >= 2 ? "sm:hidden" : ""
+                } object-contain w-full max-w-xs justify-self-center`}
+              />
+            ))}
+        </div>
         {/* <DialogFooter>
           <Button text="submit" variant="outline" onClick={() => {}} />
         </DialogFooter> */}

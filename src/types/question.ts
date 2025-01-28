@@ -6,6 +6,7 @@ export type Option = {
 export type UserHelper = {
   title: string;
   description: string;
+  images?: string[];
 };
 
 export type Question = {

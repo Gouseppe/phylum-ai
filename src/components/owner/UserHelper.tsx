@@ -45,7 +45,7 @@ export const UserHelper: React.FC<Props> = ({ description, title, images }) => {
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         <div>{description}</div>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-1 ">
+        <div className="grid md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-1 ">
           {images &&
             images.map((url, index) => (
               <img

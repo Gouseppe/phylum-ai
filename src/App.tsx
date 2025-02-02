@@ -48,7 +48,6 @@ function App() {
 
   const handleSiguientePregunta = async () => {
     if (isThereAPhylum()) {
-      console.log("entroooo");
       const respons = await getPhylum(answers.map((a) => (a === -1 ? 0 : a)));
       setRespuesta(respons);
       (botonInvisible.current as unknown as HTMLButtonElement).click();
@@ -62,11 +61,6 @@ function App() {
 
   const handlePreguntaAnterior = () => {
     if (preguntaActual > 0) {
-      // esto tengo que quitarlo porque ya no estoy guardando la pregunta, pero esto cambia la logica del renderizado de las preguntas
-      // ya que ahora no puedo tomar encuenta el vlaor de la pregunta en el objeto porque yano lo traajo con un objeto ni con ese valor
-      // if (respuestas[preguntaActual].value === -1) {
-      //   respuestas[preguntaActual].pregunta = -1;
-      // }
       undo();
     }
   };

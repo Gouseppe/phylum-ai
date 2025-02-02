@@ -22,13 +22,11 @@ export const useMotorDeInferencia = () => {
   const setAnswerNew = (indexAnswer: number, answer = -1) => {
     const aux = [...answers];
     aux[indexAnswer] = answer;
-    console.log(aux);
     setAnswers(aux);
   };
 
   // Revisa si la combinacion actual que tiene el usuario es igual a una combinacion asociada a un phylum existente
   const isThereAPhylum = (): boolean => {
-    console.log(answers.map((a) => (a === -1 ? 0 : a)));
     const auxAnswer = answers.map((a) => (a === -1 ? 0 : a));
     return PHYLUMS.some((e) =>
       e.every((element, index) => element === auxAnswer[index])

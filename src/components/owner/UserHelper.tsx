@@ -20,7 +20,6 @@ function getImageUrl(name: string) {
 }
 
 export const UserHelper: React.FC<Props> = ({ description, title, images }) => {
-  console.log(import.meta.url);
   return (
     <Dialog>
       <DialogTrigger asChild>

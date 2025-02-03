@@ -13,6 +13,7 @@ function animation(ref: HTMLDivElement, text: string) {
       clearInterval(intervalID);
     }
   }, 150);
+  return intervalID;
 }
 
 export const Writter: React.FC<Props> = ({ text }) => {
@@ -21,9 +22,15 @@ export const Writter: React.FC<Props> = ({ text }) => {
   useEffect(() => {
     if (element.current && !isAnimating.current) {
       isAnimating.current = true;
+      let intervalID: NodeJS.Timeout;
       setTimeout(() => {
-        animation(element.current!, text);
+        intervalID = animation(element.current!, text);
       }, 1000);
+      return () => {
+        if (intervalID) {
+          clearInterval(intervalID);
+        }
+      };
     }
   }, []);
   return (
@@ -38,7 +45,7 @@ export const Writter: React.FC<Props> = ({ text }) => {
         }}
       ></div>
       <div
-        className="ml-8 w-1 bg-white animate-[cursorTextAnimation_3s_ease-in-out_forwards] absolute right-[-40px] top-0 bottom-1"
+        className="ml-8 w-1 bg-white animate-[cursorTextAnimation_3s_ease-in-out_forwards] absolute sm:right-[-40px] right-[-20px] top-0 bottom-1"
         style={{
           boxShadow:
             " 0 0 7px #f9fafb,0 0 10px #f9fafb,0 0 21px #f9fafb,0 0 42px #5271ff,0 0 82px #5271ff,0 0 92px #5271ff,0 0 102px #5271ff,0 0 151px #5271ff",

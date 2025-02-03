@@ -13,6 +13,7 @@ import { UserHelper } from "./components/owner/UserHelper";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -105,17 +106,16 @@ function App() {
               activar respuesta
             </div>
           </DialogTrigger>
-          <DialogContent
-            className="sm:w-[700px] max-w-[95%]"
-            aria-describedby="el phylum que se obtuvo del analisis"
-          >
+          <DialogContent className="sm:w-[700px] max-w-[95%]">
             {!respuesta || respuesta === "pending" ? (
               <>
                 <DialogHeader className="justify-center items-center">
                   <DialogTitle>
                     Esperando la respuesta del servidor...
                   </DialogTitle>
+                  <DialogDescription aria-describedby="Esperando la respuesta del servidor..." />
                 </DialogHeader>
+
                 <div className="flex justify-center mt-4">
                   <div className="loader"></div>
                 </div>
@@ -124,6 +124,12 @@ function App() {
               <>
                 <DialogHeader className="justify-center items-center">
                   <DialogTitle>{phylums[respuesta]}</DialogTitle>
+                  <DialogDescription
+                    aria-describedby={
+                      PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                        .description
+                    }
+                  />
                 </DialogHeader>
                 <div>
                   {capitalize(
@@ -146,20 +152,23 @@ function App() {
                       "object-contain w-full max-w-xs justify-self-center"
                     }
                   />
-                  <img
-                    src={getImageUrl(
-                      PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
-                        .images[1],
-                      "jpg"
-                    )}
-                    alt={
-                      PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
-                        .images[1]
-                    }
-                    className={
-                      "object-contain w-full max-w-xs justify-self-center"
-                    }
-                  />
+                  {PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                    .images[1] && (
+                    <img
+                      src={getImageUrl(
+                        PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                          .images[1],
+                        "jpg"
+                      )}
+                      alt={
+                        PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                          .images[1]
+                      }
+                      className={
+                        "object-contain w-full max-w-xs justify-self-center"
+                      }
+                    />
+                  )}
                 </div>
               </>
             )}

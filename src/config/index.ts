@@ -40,7 +40,7 @@ export const PHYLUMS_ANSWERS: PhylumsAnswers = {
   cnidarios: {
     description:
       "Incluyen medusas, corales y anémonas. Tienen células urticantes llamadas cnidocitos y presentan simetría radial. Pueden tener forma de pólipo o medusa.",
-    images: ["cnidarios1", "cnidarios2"],
+    images: ["cnidarios1"],
   },
   nemertinos: {
     description:
@@ -60,7 +60,7 @@ export const PHYLUMS_ANSWERS: PhylumsAnswers = {
   asquelmintos: {
     description:
       "Un grupo diverso que incluye nematodos y rotíferos. Tienen un cuerpo cilíndrico y no segmentado. Muchos son parásitos, mientras que otros son de vida libre.",
-    images: ["asquelmintos1", "asquelmintos2"],
+    images: ["asquelmintos1"],
   },
   cordados: {
     description:
@@ -80,7 +80,7 @@ export const PHYLUMS_ANSWERS: PhylumsAnswers = {
   artropodos: {
     description:
       "El filo más diverso, incluye insectos, arácnidos, crustáceos y miriápodos. Tienen un exoesqueleto quitinoso, apéndices articulados y cuerpo segmentado.",
-    images: ["artropodos1.", "artropodos2"],
+    images: ["artropodos1", "artropodos2"],
   },
 };
 
@@ -91,7 +91,6 @@ export const QUESTIONS: Question[] = [
       title: "¿Tu organismo es unicelular o multicelular?",
       description:
         "Un organismo unicelular es como una pequeña 'fábrica' completa dentro de una sola célula, que realiza todas las funciones necesarias para vivir. Un organismo multicelular, como los animales y las plantas, está compuesto por millones o billones de células que trabajan juntas para formar tejidos y órganos.",
-      images: ["organismo-unicelular", "organismo-unicelular-2"],
     },
     Options: [
       {
@@ -110,7 +109,6 @@ export const QUESTIONS: Question[] = [
       title: "Tejido verdadero",
       description:
         "Un tejido verdadero es un conjunto de células que tienen una estructura similar y trabajan juntas para realizar una función específica dentro de un organismo. Imagina que las células son como los ladrillos de una casa: cada ladrillo tiene una función específica (soportar el peso, aislar del frío, etc.), pero todos juntos forman las paredes y estructuras de la casa. Lo mismo ocurre con las células en un tejido: aunque cada una tiene su propia función, al trabajar juntas forman un tejido que cumple una función más compleja.",
-      images: ["tejido-verdadero-1", "tejido-verdadero-2"],
     },
     Options: [
       {
@@ -129,7 +127,6 @@ export const QUESTIONS: Question[] = [
       title: "Simetría en organismos",
       description:
         "La simetría se refiere a la disposición de las partes del cuerpo de un organismo. La simetría radial significa que las partes del cuerpo están dispuestas alrededor de un eje central (como una estrella de mar). La simetría bilateral significa que el organismo tiene un lado izquierdo y derecho que son imágenes especulares (como los humanos). La simetría radial secundaria es una variante de la simetría radial.",
-      images: ["simetria-radial", "simetria-bilateral"],
     },
     Options: [
       {
@@ -152,7 +149,6 @@ export const QUESTIONS: Question[] = [
       title: "Tipos de revestimiento",
       description:
         "El revestimiento se refiere a la cavidad corporal de un organismo. Los acelomados no tienen cavidad corporal (nulo), los pseudocelomados tienen una cavidad parcialmente revestida, y los celomados tienen una cavidad completamente revestida por tejido mesodérmico.",
-      images: ["revestimiento-acelomado", "revestimiento-celomado"],
     },
     Options: [
       {
@@ -175,7 +171,6 @@ export const QUESTIONS: Question[] = [
       title: "Sistema digestivo",
       description:
         "Un sistema digestivo completo tiene una boca y un ano separados, lo que permite que el alimento fluya en una sola dirección. Un sistema digestivo incompleto tiene una sola abertura que sirve tanto para la ingestión como para la excreción.",
-      images: ["sistema-digestivo-completo", "sistema-digestivo-incompleto"],
     },
     Options: [
       {
@@ -194,7 +189,6 @@ export const QUESTIONS: Question[] = [
       title: "Esquizocelomados vs Enterocelomados",
       description:
         "Los esquizocelomados son organismos cuya cavidad corporal se forma por la división del mesodermo ( una de las tres capas principales de células en el embrión durante el desarrollo temprano). Los enterocelomados son organismos cuya cavidad corporal se forma a partir de bolsas del tubo digestivo embrionario.",
-      images: ["esquizocelomados", "enterocelomados"],
     },
     Options: [
       {
@@ -213,7 +207,6 @@ export const QUESTIONS: Question[] = [
       title: "Estructuras de soporte",
       description:
         "El manto y la concha son características de los moluscos, que secretan una concha calcárea para protección. El esqueleto hidrostático es una cavidad llena de líquido que proporciona soporte (como en los gusanos). El exoesqueleto es una cubierta externa dura que protege y soporta el cuerpo (como en los artrópodos).",
-      images: ["manto-concha", "esqueleto-hidrostatico", "exoesqueleto"],
     },
     Options: [
       {

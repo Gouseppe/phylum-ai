@@ -32,7 +32,7 @@ export type PhylumName =
 
 type PhylumAnswer = {
   description: string;
-  images: [string, string];
+  images: string[];
 };
 
 export type PhylumsAnswers = Record<PhylumName, PhylumAnswer>;

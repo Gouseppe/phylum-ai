@@ -1,4 +1,4 @@
-import { QUESTIONS } from "@/config/index";
+import { PHYLUMS_ANSWERS, QUESTIONS } from "@/config/index";
 import { getPhylum } from "./config/api/backend/requests/phylum";
 import bgVideo from "@/assets/bg/video/bacterias.mp4";
 // hooks
@@ -19,7 +19,24 @@ import {
 } from "@/components/shadcn/dialog";
 import { useRef, useState } from "react";
 import { Writter } from "./components/owner/Writter";
-
+import { getImageUrl } from "./helpers/getImageUrl";
+import { PhylumName } from "./types/question";
+import { capitalize } from "./helpers/capitalize";
+const phylums = {
+  protozoarios: "Protozoarios",
+  poriferos: "Poríferos",
+  equinodermos: "Equinodermos",
+  ctenoforos: "Ctenóforos",
+  cnidarios: "Cnidarios",
+  nemertinos: "Nemertinos",
+  platelmintos: "Platelmintos",
+  acantocefalos: "Acantocéfalos",
+  asquelmintos: "Asquelmintos",
+  cordados: "Cordados",
+  moluscos: "Moluscos",
+  anelidos: "Anélidos",
+  artropodos: "Artrópodos",
+};
 function App() {
   const {
     getNextQuestion,
@@ -32,7 +49,7 @@ function App() {
     answers,
     questions,
   } = useMotorDeInferencia();
-  const [respuesta, setRespuesta] = useState("");
+  const [respuesta, setRespuesta] = useState<PhylumName | "pending">();
   const botonInvisible = useRef(null);
 
   const handleRespuestaSeleccionada = (respuesta: string) => {
@@ -48,9 +65,12 @@ function App() {
 
   const handleSiguientePregunta = async () => {
     if (isThereAPhylum()) {
-      const respons = await getPhylum(answers.map((a) => (a === -1 ? 0 : a)));
-      setRespuesta(respons);
+      setRespuesta("pending");
       (botonInvisible.current as unknown as HTMLButtonElement).click();
+      const respons = (await getPhylum(
+        answers.map((a) => (a === -1 ? 0 : a))
+      )) as PhylumName;
+      setRespuesta(respons.toLowerCase() as PhylumName);
       return;
     }
     if (preguntaActual < QUESTIONS.length - 1) {
@@ -85,10 +105,64 @@ function App() {
               activar respuesta
             </div>
           </DialogTrigger>
-          <DialogContent className="sm:w-[700px] max-w-[95%]">
-            <DialogHeader className="justify-center items-center">
-              <DialogTitle>{respuesta}</DialogTitle>
-            </DialogHeader>
+          <DialogContent
+            className="sm:w-[700px] max-w-[95%]"
+            aria-describedby="el phylum que se obtuvo del analisis"
+          >
+            {!respuesta || respuesta === "pending" ? (
+              <>
+                <DialogHeader className="justify-center items-center">
+                  <DialogTitle>
+                    Esperando la respuesta del servidor...
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="flex justify-center mt-4">
+                  <div className="loader"></div>
+                </div>
+              </>
+            ) : (
+              <>
+                <DialogHeader className="justify-center items-center">
+                  <DialogTitle>{phylums[respuesta]}</DialogTitle>
+                </DialogHeader>
+                <div>
+                  {capitalize(
+                    PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                      .description
+                  )}
+                </div>
+                <div className="grid md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-1 ">
+                  <img
+                    src={getImageUrl(
+                      PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                        .images[0],
+                      "jpg"
+                    )}
+                    alt={
+                      PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                        .images[0]
+                    }
+                    className={
+                      "object-contain w-full max-w-xs justify-self-center"
+                    }
+                  />
+                  <img
+                    src={getImageUrl(
+                      PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                        .images[1],
+                      "jpg"
+                    )}
+                    alt={
+                      PHYLUMS_ANSWERS[respuesta.toLowerCase() as PhylumName]
+                        .images[1]
+                    }
+                    className={
+                      "object-contain w-full max-w-xs justify-self-center"
+                    }
+                  />
+                </div>
+              </>
+            )}
           </DialogContent>
         </Dialog>
         {/* contenedor de las preguntas respondidas */}

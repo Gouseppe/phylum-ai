@@ -3,20 +3,26 @@ import React, { useEffect, useRef } from "react";
 type Props = {
   text: string;
 };
+
+function animation(ref: HTMLDivElement, text: string) {
+  let index = 0;
+  const intervalID = setInterval(() => {
+    ref.innerHTML += text[index] || "";
+    index++;
+    if (index >= text.length) {
+      clearInterval(intervalID);
+    }
+  }, 150);
+}
+
 export const Writter: React.FC<Props> = ({ text }) => {
   const element = useRef(null);
+  const isAnimating = useRef(false);
   useEffect(() => {
-    if (element.current) {
+    if (element.current && !isAnimating.current) {
+      isAnimating.current = true;
       setTimeout(() => {
-        const intervalID = setInterval(() => {
-          const ref = element.current as unknown as HTMLDivElement;
-
-          ref.innerHTML += text[ref.innerHTML.length] || "";
-          console.log(ref.innerText, text, ref.innerText === text);
-          if (ref.innerText === text || ref.innerHTML.length >= text.length) {
-            clearInterval(intervalID);
-          }
-        }, 150);
+        animation(element.current!, text);
       }, 1000);
     }
   }, []);
@@ -24,10 +30,11 @@ export const Writter: React.FC<Props> = ({ text }) => {
     <div className="flex col relative justify-center">
       <div
         ref={element}
-        className="md:text-9xl md:h-[128px] text-6xl h-[60px] text-gray-50 font-[Yellowtail]"
+        className="md:text-9xl md:h-[128px] text-6xl h-[60px] text-gray-50"
         style={{
           textShadow:
             " 0 0 7px #f9fafb,0 0 10px #f9fafb,0 0 21px #f9fafb,0 0 42px #5271ff,0 0 82px #5271ff,0 0 92px #5271ff,0 0 102px #5271ff,0 0 151px #5271ff ",
+          fontFamily: "Raleway",
         }}
       ></div>
       <div

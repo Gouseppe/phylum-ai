@@ -35,7 +35,10 @@ export const UserHelper: React.FC<Props> = ({ description, title, images }) => {
           </Button>
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:w-[700px] max-w-[95%]">
+      <DialogContent
+        className="sm:w-[700px] max-w-[95%]"
+        aria-describedby="algo"
+      >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>

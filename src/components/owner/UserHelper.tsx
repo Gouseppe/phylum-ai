@@ -7,16 +7,12 @@ import {
   DialogTrigger,
 } from "@/components/shadcn/dialog";
 import Button from "./Button";
+import { getImageUrl } from "@/helpers/getImageUrl";
 
 interface Props {
   title: string;
   description: string;
   images?: string[];
-}
-
-function getImageUrl(name: string) {
-  // note that this does not include files in subdirectories
-  return new URL(`../../assets/img/${name}.png`, import.meta.url).href;
 }
 
 export const UserHelper: React.FC<Props> = ({ description, title, images }) => {

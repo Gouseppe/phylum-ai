@@ -2,6 +2,7 @@ import { MessageCircleQuestion } from "lucide-react";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -41,6 +42,7 @@ export const UserHelper: React.FC<Props> = ({ description, title, images }) => {
       >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
+          <DialogDescription aria-describedby={description}></DialogDescription>
         </DialogHeader>
         <div>{description}</div>
         <div className="grid md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-1 ">

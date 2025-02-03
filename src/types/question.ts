@@ -14,3 +14,25 @@ export type Question = {
   Options: Option[];
   userHelper?: UserHelper;
 };
+
+export type PhylumName =
+  | "protozoarios"
+  | "poriferos"
+  | "equinodermos"
+  | "ctenoforos"
+  | "cnidarios"
+  | "nemertinos"
+  | "platelmintos"
+  | "acantocefalos"
+  | "asquelmintos"
+  | "cordados"
+  | "moluscos"
+  | "anelidos"
+  | "artropodos";
+
+type PhylumAnswer = {
+  description: string;
+  images: [string, string];
+};
+
+export type PhylumsAnswers = Record<PhylumName, PhylumAnswer>;

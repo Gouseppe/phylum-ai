@@ -5,9 +5,9 @@ export const PHYLUMS = [
   [2, 1, 0, 0, 0, 0, 0], // Poriferos
   [2, 2, 1, 0, 0, 0, 0], // Equinodermos
   [2, 2, 2, 0, 1, 0, 0], // Ctenoforos
-  [2, 2, 2, 0, 2, 0, 0], // Cnidardos
+  [2, 2, 2, 0, 2, 0, 0], // Cnidarios
   [2, 2, 3, 1, 1, 0, 0], // Nemertinos
-  [2, 2, 3, 1, 2, 0, 0], // Platermintos
+  [2, 2, 3, 1, 2, 0, 0], // Platelmintos
   [2, 2, 3, 2, 1, 0, 0], // Acantocefalos
   [2, 2, 3, 2, 2, 0, 0], // Asquelmintos
   [2, 2, 3, 3, 0, 1, 0], // Cordados

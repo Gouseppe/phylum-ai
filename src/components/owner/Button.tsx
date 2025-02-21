@@ -9,6 +9,7 @@ type Props = {
   onClick?: () => void;
   children?: React.ReactNode | undefined;
   style?: CSSProperties;
+  hover?: "white" | "black";
 };
 
 const Button: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const Button: React.FC<Props> = ({
   textColor = "black",
   children,
   style,
+  hover = "black",
 }) => {
   const styles =
     variant === "solid"
@@ -40,7 +42,13 @@ const Button: React.FC<Props> = ({
       onClick={onClick}
       className="p-2 text-base relative overflow-hidden border rounded-md group"
     >
-      <div className="absolute inset-0 bg-transparent group-hover:bg-gray-950/20 transition-colors duration-500"></div>
+      <div
+        className={`absolute inset-0 bg-transparent ${
+          hover === "black"
+            ? "group-hover:bg-gray-950/20"
+            : "group-hover:bg-white/20"
+        } transition-colors duration-500`}
+      ></div>
       <div
         style={{
           display: "flex",

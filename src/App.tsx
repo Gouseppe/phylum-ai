@@ -1,7 +1,6 @@
 import { PHYLUMS_ANSWERS, QUESTIONS } from "@/config/index";
 import logoUDO from "@/assets/img/logo-udo.png";
 import { getPhylum } from "./config/api/backend/requests/phylum";
-import bgVideo from "@/assets/bg/video/bacterias.mp4";
 // hooks
 import { useMotorDeInferencia } from "./hooks/phylumAi";
 // icons
@@ -89,13 +88,13 @@ function App() {
 
   return (
     <div className="layout m-0 w-svw md:h-svh min-h-svh flex relative justify-start items-center flex-col md:gap-10 gap-7 bg-gray-950 z-0">
-      <video
+      {/* <video
         src={bgVideo}
         autoPlay
         muted
         loop
         className="absolute top-0 left-0 w-full h-full z-[-1] blur-sm object-cover"
-      ></video>
+      ></video> */}
       {/* tittle and main content wrapper */}
       <div className="layout m-0 flex md:flex-1 h-[max(667px,100svh)] w-full relative justify-start items-center flex-col md:gap-10 gap-7 p-4 ">
         <div className="pt-4 basis-0">
@@ -179,7 +178,7 @@ function App() {
             </DialogContent>
           </Dialog>
           {/* contenedor de las preguntas respondidas */}
-          <div className=" flex flex-col rounded-md overflow-auto md:-order-none order-1 p-4 bg-black bg-opacity-30 gap-2 md:max-h-none min-h-34 md:min-h-min">
+          <div className=" flex flex-col rounded-md overflow-auto bg-[rgba(33,53,85,0.5)]  md:-order-none order-1 p-4  gap-2 md:max-h-none min-h-34 md:min-h-min">
             {questions.map((value) => {
               return (
                 <div

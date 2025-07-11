@@ -186,7 +186,7 @@ function App() {
                   onClick={() => {
                     goToQuestion(value);
                   }}
-                  className="p-2 cursor-pointer  bg-white  rounded-[2px]  transition-all duration-300 hover:shadow-[0_0_7px_#f9fafb,0_0_10px_#65788c,0_0_11px_#05386c,0_0_22px_#0629d7] hover:scale-[1.03]"
+                  className="p-2 cursor-pointer  bg-white  rounded-[2px]  transition-all duration-300 hover:shadow-[0_0_7px_#f9fafb,0_0_10px_#65788c,0_0_11px_#05386c,0_0_22px_#0629d7] hover:scale-x-95"
                 >
                   <div className="font-light">
                     {QUESTIONS[Number(value)].text}
